@@ -1,12 +1,10 @@
 class BlogsController < ApplicationController
   before_action :authenticate_user!
  before_action :set_blog, only: [:show, :edit, :update, :destroy]
-
-  def index
-
-    @blogs = Blog.all
+   def index
+  @blogs = Blog.all
    respond_to do |format|
-    format.html
+   format.html
     format.js
    end
   end
@@ -22,6 +20,7 @@ class BlogsController < ApplicationController
   def new
     if params[:back]
       @blog = Blog.new(blogs_params)
+
     else
       @blog = Blog.new
     end
@@ -30,9 +29,12 @@ class BlogsController < ApplicationController
  def create
     @blog = Blog.new(blogs_params)
     @blog.user_id = current_user.id
+    @blog.frontcover.retrieve_from_cache! params[:cache][:frontcover_cache] if params[:cache][:frontcover_cache].present?
+    @blog.save!
+
     if @blog.save
       # 一覧画面へ遷移して"ブログを作成しました！"とメッセージを表示します。
-      redirect_to blogs_path, notice: "ブログを作成しました！"
+      redirect_to blogs_path, notice: "トッピクを作成しました！"
       NoticeMailer.sendmail_blog(@blog).deliver
     else
       # 入力フォームを再描画します。
@@ -72,14 +74,16 @@ class BlogsController < ApplicationController
 
   def confirm
    @blog = Blog.new(blogs_params)
+   @blog.frontcover.cache!
     render :new if @blog.invalid?
+
   end
 
 
 
    private
     def blogs_params
-      params.require(:blog).permit(:title, :content)
+      params.require(:blog).permit(:title,:content,:image,:frontcover)
     end
     def set_blog
       @blog = Blog.find(params[:id])

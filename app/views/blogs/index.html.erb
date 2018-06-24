@@ -8,6 +8,7 @@
     <% @blogs.each do |blog| %>
       <div class="row">
         <%= profile_img(blog.user) %>
+        <h4><strong>  <%= image_tag(blog.frontcover) %></strong></h4>
         <h4><%= blog.user.name %></h4>
         <%= link_to blog_path(blog) do %>
           <h4><strong><%= blog.title %></strong></h4>

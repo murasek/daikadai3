@@ -1,0 +1,30 @@
+<%= form_for(@TopicsController, url:choose_new_or_edit) do |f| %>
+<% if @topic.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= @topic.errors.count %>件のエラーがあります。</h2>
+
+    <ul>
+    <% @topic.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+
+<% end %>
+
+
+
+
+ <%= f.label :タイトル %>
+ <%= f.text_field :title, class: 'form-control' %>
+<%= f.label :内容 %>
+<%= f.text_field :content, class:   'form-control' %>
+
+<%= f.label :画像 %><br />
+<%= image_tag(@topic.frontcover) if @topic.frontcover.present? %>
+<%= f.file_field :frontcover %>
+
+
+<br>
+<%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+<% end %>

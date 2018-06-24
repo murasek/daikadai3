@@ -38,12 +38,15 @@
     </div>
     <div class="collapse navbar-collapse" id="top-nav">
     <ul class="nav navbar-nav">
-      <li class="dropdown-header"><%= link_to "Achieve", root_path %></li>
+      <img src="<%= asset_path "facebook_icon_black.png" %>" class="img-responsive center-block" >
+
+      <!-- <img class="img-responsive center-block" src="<%= asset_path "facebook_icon_black.png" %>"  > -->
+      <!-- <li class="dropdown-header"><%= link_to "Mirror", root_path %></li> -->
       <li class="dropdown-header"><%= link_to "トップページ", root_path %></li>
-      <li class="dropdown-header"><%= link_to "お問い合わせ", new_contact_path %></li>
-      <li class="dropdown-header"><%= link_to "ブログ", blogs_path %></li>
+      <!-- <li class="dropdown-header"><%= link_to "お問い合わせ", new_contact_path %></li> -->
+      <li class="dropdown-header"><%= link_to "Mirros", topics_path %></li>
       <li class="dropdown-header"><%= link_to 'マイページ', edit_user_registration_path %></li>
-      <li class="dropdown-header"><%= link_to 'ユーザー一覧', users_path if user_signed_in? %></li>
+      <li class="dropdown-header"><%= link_to '友達', users_path if user_signed_in? %></li>
       <li class="dropdown-header"><%= link_to "メッセージ", conversations_path %></li>
       <% if user_signed_in? %>
       <%= link_to notifications_index_path, class:"navbar-brand" do %>
@@ -66,10 +69,9 @@
 <%= yield %>
 
   <footer>
-    <p>運営会社DIVE INTO CODE株式会社</p>
-    <p>© 2015-2016 Copyright DIVE INTO CODE Corp.</p>
+    <p>運営会社PACH WORK MIRRORS株式会社</p>
+    <p>© 2017-2018 Pach Work Mirrors Corp.</p>
   </footer>
 
 </body>
 </html>
-

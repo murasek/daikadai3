@@ -1,21 +1,21 @@
 <div class="container">
   <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
     <h3>以下の内容で、送信する。</h3>
-    <%= form_for(@blog) do |f| %>
+    <%= form_for(@topic) do |f| %>
       <%= f.hidden_field :title %>
-      <p>タイトル:<%= @blog.title %></p>
+      <p>タイトル:<%= @topic.title %></p>
       <%= f.hidden_field :content %>
-      <p>本文:<%= @blog.content %></p>
-    <p>画像  <%= image_tag (@blog.frontcover.url) if @blog.frontcover.url.present? %></p>
+      <p>本文:<%= @topic.content %></p>
+    <p>画像  <%= image_tag (@topic.frontcover.url) if @topic.frontcover.url.present? %></p>
       <%= f.hidden_field :frontcover_cache %>
-      <%= hidden_field_tag :"cache[frontcover]", @blog.frontcover.cache_name %>
+      <%= hidden_field_tag :"cache[frontcover]", @topic.frontcover.cache_name %>
 
       <%= f.submit "登録",class: 'btn btn-primary btn-block' %>
     <% end %>
-    <%= form_for(@blog, url: new_blog_path, method: 'get') do |f| %>
+    <%= form_for(@topic, url: new_topic_path, method: 'get') do |f| %>
       <%= f.hidden_field :title %>
       <%= f.hidden_field :content %>
-      
+
       <%= f.submit "もどる", name: 'back', class: 'btn btn-default btn-block' %>
     <% end %>
   </div>
