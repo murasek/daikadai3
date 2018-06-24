@@ -11,7 +11,6 @@ class TopicsController < ApplicationController
 
   # showアククションを定義します。入力フォームと一覧を表示するためインスタンスを2つ生成します。
    def show
-     @topic = Topic.new
     @comment = @topic.comments.build
     @comments = @topic.comments
     Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
