@@ -1,4 +1,4 @@
-<%= form_for(@TopicsController, url:choose_new_or_edit) do |f| %>
+<%= form_for(@topic, url:choose_new_or_edit) do |f| %>
 <% if @topic.errors.any? %>
   <div id="error_explanation">
     <h2><%= @topic.errors.count %>件のエラーがあります。</h2>

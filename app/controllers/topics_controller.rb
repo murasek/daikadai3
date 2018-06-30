@@ -30,7 +30,8 @@ class TopicsController < ApplicationController
  def create
     @topic = Topic.new(topics_params)
     @topic.user_id = current_user.id
-    @topic.frontcover.retrieve_from_cache! params[:cache][:frontcover_cache] if params[:cache][:frontcover_cache].present?
+    @topic.frontcover.retrieve_from_cache! params[:cache][:frontcover] if params[:cache][:frontcover].present?
+  
     @topic.save!
 
     if @topic.save
@@ -84,7 +85,7 @@ class TopicsController < ApplicationController
 
    private
     def topics_params
-      params.require(:topic).permit(:title,:content,:image,:frontcover)
+      params.require(:topic).permit(:title,:content,:frontcover,:frontcover_cache)
     end
     def set_topic
       @topic = Topic.find(params[:id])

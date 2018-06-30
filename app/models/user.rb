@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-   has_many :blogs, dependent: :destroy
+   has_many :topics, dependent: :destroy
   # CommentモデルのAssociationを設定
   has_many :comments, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by(email: auth.info.email)
-  
+
     unless user
       user = User.new(
           name:     auth.extra.raw_info.name,
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
       user.save(validate: false)
     end
     user
-  end       
+  end
   def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid)
 
@@ -52,8 +52,8 @@ class User < ActiveRecord::Base
 
 def self.create_unique_string
     SecureRandom.uuid
-end         
-  
+end
+
 def update_with_password(params, *options)
     if provider.blank?
       super
@@ -77,4 +77,3 @@ def unfollow!(other_user)
   relationships.find_by(followed_id: other_user.id).destroy
 end
 end
-

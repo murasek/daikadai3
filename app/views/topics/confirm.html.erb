@@ -15,7 +15,7 @@
     <%= form_for(@topic, url: new_topic_path, method: 'get') do |f| %>
       <%= f.hidden_field :title %>
       <%= f.hidden_field :content %>
-
+ <%= hidden_field_tag :"cache[frontcover]",@topic.frontcover.cache_name %>
       <%= f.submit "もどる", name: 'back', class: 'btn btn-default btn-block' %>
     <% end %>
   </div>
